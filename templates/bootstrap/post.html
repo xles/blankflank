@@ -1,0 +1,23 @@
+<div class="container">
+	<div class="row">
+		<div class="span9">
+			<h1><?=$title?></h1>
+			Posted <?=$pubdate?>
+			in <a href="<?=$category['url']?>"><?=$category['title']?></a>
+			<article>
+				<?=$content?>
+			</article>
+			<small>
+			<?php foreach($post_tags as $tag): ?>
+				<a href="<?=$tag['url']?>" class="label"><?=$tag['title']?></a>
+			<?php endforeach; ?>
+			</small>
+			<hr>
+			<?php include('./templates/bootstrap/comments.html'); ?>
+		</div>
+		<div class="span3 sidebar">
+			<?php include('./templates/bootstrap/sidebar.html'); ?>
+		</div>
+	</div>
+	<hr>
+</div> <!-- /container -->

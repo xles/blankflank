@@ -1,0 +1,73 @@
+@import url("bootstrap.css");
+
+body {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	color: #eeeeee;
+	background-color: #102;
+}
+article {
+	padding: 16px;
+	font-family: Georgia, Serif;
+}
+.containern {
+	background-color: #222222;
+}
+a {
+	color: #FF0080;
+	text-decoration: none;
+}
+a:hover,
+a:focus {
+	color: #FF40CC;
+	text-decoration: underline;
+}
+hr {
+	border-top: 1px solid #433;
+	border-bottom: 1px solid #000;
+}
+#copyright {
+	text-align:center;
+	clear:both; 
+	margin: auto;
+	padding:8px;
+	font-size:10px;
+	min-height: 50px;
+/*	background: #ff0000;  */
+}
+p {
+	text-align:justify;
+}
+.sidebar {
+	background-repeat: no-repeat;
+	background-image: url('../img/blankflank.png');
+	background-size: 75%;
+	background-position: center 96px;
+}
+header {
+	padding-bottom: 276px;
+	color: #fff;
+}
+.navbar-inverse .navbar-inner {
+	background-color: #213;
+	background-image: -moz-linear-gradient(top, #435, #102);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#435), to(#102));
+	background-image: -webkit-linear-gradient(top, #435, #102);
+	background-image: -o-linear-gradient(top, #435, #102);
+	background-image: linear-gradient(to bottom, #435, #102);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff435', endColorstr='#ff102', GradientType=0);
+	border-color: #324;
+}
+.label, .badge {
+	background-color: #ccc;
+	color: #102;
+}
+a.label:hover, 
+a.label:focus, 
+a.badge:hover, 
+a.badge:focus {
+	color: #102;
+	text-decoration: none;
+	cursor: pointer;
+}

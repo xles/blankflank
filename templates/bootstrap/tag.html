@@ -1,0 +1,26 @@
+<div class="container">
+	<div class="row">
+		<div class="span9">
+			<h2>Listing posts tagged with '<?=$tag?>'</h2>
+
+			<?php foreach ($posts as $post): ?>
+				<p>
+					<a href="<?=$post['url']?>"><?=$post['title']?></a>
+					Posted on <?=$post['pubdate']?>
+					in <?=$post['category']?>
+<!--
+				<br>Tags:
+				<?php foreach ($post['tags'] as $tag): ?>
+					<a href="<?=$tag['url']?>" class="label"><?=$tag['title']?></a>
+				<?php endforeach; ?>
+				<hr>
+-->
+				</p>
+			<?php endforeach; ?>
+		</div>
+		<div class="span3 sidebar">
+			<?php include('./templates/bootstrap/sidebar.html'); ?>
+		</div>
+	</div>
+	<hr>
+</div> <!-- /container -->

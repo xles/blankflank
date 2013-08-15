@@ -1,0 +1,16 @@
+Latest posts
+<br>
+<?php foreach ($posts as $post): ?>
+	<a href="<?=$post['url']?>"><?=$post['title']?></a>
+	<br>
+	Posted on <?=$post['pubdate']?>
+	in <?=$post['category']?>
+	<br>Tags:
+	<?php foreach ($post['tags'] as $tag): ?>
+		<?=$tag?>, 
+	<?php endforeach; ?>
+	<hr>
+<?php endforeach; ?>
+<?php include('./templates/default/tags.html'); ?>
+<hr>
+<?php include('./templates/default/categories.html'); ?>

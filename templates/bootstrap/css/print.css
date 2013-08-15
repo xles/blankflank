@@ -1,0 +1,11 @@
+html {
+}
+body, nav, footer, header, form, input, button, dl {
+	display: none;
+}
+article {
+	display: block;
+	font-size: 12pt;
+	font-family: "Times New Roman", serif;
+	text-align: justify;
+}

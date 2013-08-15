@@ -1,0 +1,471 @@
+/********************************** MAIN **********************************/
+code {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 13px;
+        color: #000000;
+	white-space: pre-wrap;
+}
+#paste {
+        background-color: #FFFFF7;
+	width: 670px;
+
+        border: 1px solid #000;
+        margin: 20px auto;
+        box-shadow: 1mm 1mm 1mm #606060;
+        padding:8px 10px 0px 5px;
+/*      float:left; */
+}
+#paste ol {
+}
+#paste li:hover {
+	background-color: #E7E7FF;
+}
+#paste li:active {
+        background-color: #FFE7E7;
+}
+
+/* Datalist colourscheme: */
+li.odd {
+	background-color: #F0FFE7;
+}
+li.even {
+	background-color: #FFFFF7;
+}
+/******************************** END MAIN ********************************/
+
+/**
+ * PHP highlight collection, use prefix .hl_php_class
+ */
+code.php {
+	 color:#0FFFF0;
+}
+.hl_php_tag {
+	font-weight:bold;
+}
+.hl_php_constant {
+        color: #C00000;
+}
+.hl_php_magic_constant {
+        color: #C00000;
+        font-style:italic;
+}
+.hl_php_number {
+	color: #008080;
+}
+.hl_php_keyword {
+	color: #0000F7;
+}
+.hl_php_variable {
+        color: #400000;
+}
+.hl_php_class {
+        color: #000040;
+}
+.hl_php_field {
+        color: #800080;
+}
+.hl_php_method {
+        color: #008080;
+}
+.hl_php_object {
+        color: #000080;
+}
+.hl_php_string_sq {
+        color: #800000;
+}
+.hl_php_string_dq {
+	color: #A00000;
+}
+.hl_php_comment_c {
+        color: #A0A0A0;
+}
+.hl_php_comment_cpp,
+.hl_php_comment_perl {
+        color: #C0C0C0;
+}
+.hl_php_comment_docblock {
+	color: #808080;
+}
+.hl_php_docblock_tag {
+	font-weight:bold;
+}
+.hl_php_docblock_info {
+	font-style:italic;
+}
+/******************************* END PHP **********************************/
+
+/**
+ * C highlight collection, use prefix .hl_c_class
+ */
+.hl_c_constant {
+        color: #800000;
+}
+.hl_c_number {
+	color: #008080;
+}
+.hl_c_keyword {
+	color: #0000F7;
+}
+.hl_c_function {
+        color: #800080;
+}
+.hl_c_comment {
+        color: #808080;
+}
+.hl_c_directive {
+        color: #808000;
+}
+.hl_c_comment_docblock {
+	color: #808080;
+}
+.hl_c_docblock_tag {
+	font-weight:bold;
+}
+.hl_c_docblock_info {
+	font-style:italic;
+}
+.hl_c_string {
+	color: #A00000;
+}
+/******************************* END C ************************************/
+
+/**
+ * C# highlight collection, use prefix .hl_cs_class
+ */
+.hl_cs_constant {
+        color: #C00000;
+}
+.hl_cs_magic_constant {
+        color: #C00000;
+        font-style:italic;
+}
+.hl_cs_number {
+	color: #008080;
+}
+.hl_cs_keyword {
+	color: #0000F7;
+}
+.hl_cs_variable {
+        color: #400000;
+}
+.hl_cs_class {
+        color: #000040;
+}
+.hl_cs_field {
+        color: #800080;
+}
+.hl_cs_method {
+        color: #008080;
+}
+.hl_cs_object {
+        color: #000080;
+}
+.hl_cs_comment_c {
+        color: #A0A0A0;
+}
+.hl_cs_comment_cpp,
+.hl_cs_comment_perl {
+        color: #C0C0C0;
+}
+.hl_cs_comment_docblock {
+	color: #808080;
+}
+.hl_cs_docblock_tag {
+	font-weight:bold;
+}
+.hl_cs_docblock_info {
+	font-style:italic;
+}
+.hl_cs_string_sq {
+        color: #800000;
+}
+.hl_cs_string_dq {
+	color: #A00000;
+}
+/******************************* END C# ***********************************/
+
+/**
+ * CSS highlight collection, use prefix .hl_css_class
+ */
+.hl_css_property {
+	color: #0000F0;
+}
+.hl_css_value {
+	color: #008080;
+}
+.hl_css_element {
+	color: #000080;
+	font-weight: bold;
+}
+.hl_css_class {
+	color: #008000;
+}
+.hl_css_id {
+        color: #800060;
+}
+.hl_css_pseudo {
+        color: #0000F0;
+}
+.hl_css_directive {
+	color: #A08000;
+}
+.hl_css_comment {
+        color: #C0C0C0;
+}
+.hl_css_string {
+	color: #800000;
+}
+/******************************* END CSS **********************************/
+
+/**
+ * Java highlight collection, use prefix .hl_java_class
+ */
+.hl_java_constant {
+        color: #C00000;
+}
+.hl_java_datatype {
+        color: #C00000;
+        font-style:italic;
+}
+.hl_java_number {
+	color: #008080;
+}
+.hl_java_keyword {
+	color: #0000F7;
+}
+.hl_java_variable {
+        color: #400000;
+}
+.hl_java_class {
+        color: #000040;
+}
+.hl_java_field {
+        color: #800080;
+}
+.hl_java_method {
+        color: #008080;
+}
+.hl_java_object {
+        color: #000080;
+}
+.hl_java_comment {
+        color: #A0A0A0;
+}
+.hl_java_comment_eol {
+        color: #C0C0C0;
+}
+.hl_java_javadoc {
+	color: #808080;
+}
+.hl_java_javadoc_tag {
+	font-weight:bold;
+}
+.hl_java_javadoc_info {
+	font-style:italic;
+}
+.hl_java_char {
+        color: #800000;
+}
+.hl_java_string {
+	color: #A00000;
+}
+/******************************* END Java *********************************/
+
+/**
+ * INI highlight collection, use prefix .hl_ini_class
+ */
+.hl_ini_bool_true {
+	color: #008000;
+}
+.hl_ini_bool_false {
+	color: #800000;
+}
+.hl_ini_number {
+	color: #008080;
+}
+.hl_ini_section {
+	color: #000080;
+	font-weight: bold;
+}
+.hl_ini_property {
+        color: #800060;
+}
+.hl_ini_comment {
+        color: #A0A0A0;
+}
+.hl_ini_string_sq {
+        color: #804000;
+}
+.hl_ini_string_dq {
+	color: #A08000;
+}
+/******************************* END ini **********************************/
+
+/**
+ * XML highlight collection, use prefix .hl_xml_class
+ */
+.hl_xml_declare {
+        color: #0000F0;
+	font-style:italic;
+}
+.hl_xml_element {
+        color: #0000A0;
+}
+.hl_xml_comment {
+	color: #808080;
+}
+.hl_xml_attribute {
+        color: #800080;
+}
+.hl_xml_value {
+	color: #800000;
+}
+/******************************* END XML **********************************/
+
+/**
+ * SQL highlight collection, use prefix .hl_sql_class
+ */
+.hl_sql_number {
+	color: #C00040;
+}
+.hl_sql_keyword {
+	color: #0000F7;
+}
+.hl_sql_datatype {
+        color: #000040;
+}
+.hl_sql_string_sq {
+        color: #800000;
+}
+.hl_sql_string_dq {
+	color: #A00000;
+}
+.hl_sql_string_a {
+        color: #008080;
+}
+.hl_sql_comment_c {
+        color: #A0A0A0;
+}
+.hl_sql_comment {
+        color: #C0C0C0;
+}
+.hl_sql_comment_docblock {
+	color: #808080;
+}
+.hl_sql_docblock_tag {
+	font-weight:bold;
+}
+.hl_sql_docblock_info {
+	font-style:italic;
+}
+/******************************* END SQL **********************************/
+
+/**
+ * Ruby highlight collection, use prefix .hl_ruby_class
+ */
+.hl_ruby_constant {
+        color: #C00000;
+}
+.hl_ruby_magic_constant {
+        color: #C00000;
+        font-style:italic;
+}
+.hl_ruby_number {
+	color: #008080;
+}
+.hl_ruby_keyword {
+	color: #0000F7;
+}
+.hl_ruby_variable {
+        color: #400000;
+}
+.hl_ruby_class {
+        color: #000040;
+}
+.hl_ruby_field {
+        color: #800080;
+}
+.hl_ruby_method {
+        color: #008080;
+}
+.hl_ruby_object {
+        color: #000080;
+}
+.hl_ruby_comment_c {
+        color: #A0A0A0;
+}
+.hl_ruby_comment_cpp,
+.hl_ruby_comment_perl {
+        color: #C0C0C0;
+}
+.hl_ruby_comment_docblock {
+	color: #808080;
+}
+.hl_ruby_docblock_tag {
+	font-weight:bold;
+}
+.hl_ruby_docblock_info {
+	font-style:italic;
+}
+.hl_ruby_string_sq {
+        color: #800000;
+}
+.hl_ruby_string_dq {
+	color: #A00000;
+}
+/******************************* END Ruby *********************************/
+
+/**
+ * IRC highlight collection, use prefix .hl_irc_class
+ */
+.hl_irc_constant {
+        color: #C00000;
+}
+.hl_irc_magic_constant {
+        color: #C00000;
+        font-style:italic;
+}
+.hl_irc_number {
+	color: #008080;
+}
+.hl_irc_keyword {
+	color: #0000F7;
+}
+.hl_irc_variable {
+        color: #400000;
+}
+.hl_irc_class {
+        color: #000040;
+}
+.hl_irc_field {
+        color: #800080;
+}
+.hl_irc_method {
+        color: #008080;
+}
+.hl_irc_object {
+        color: #000080;
+}
+.hl_irc_comment_c {
+        color: #A0A0A0;
+}
+.hl_irc_comment_cpp,
+.hl_irc_comment_perl {
+        color: #C0C0C0;
+}
+.hl_irc_comment_docblock {
+	color: #808080;
+}
+.hl_irc_docblock_tag {
+	font-weight:bold;
+}
+.hl_irc_docblock_info {
+	font-style:italic;
+}
+.hl_irc_string_sq {
+        color: #800000;
+}
+.hl_irc_string_dq {
+	color: #A00000;
+}
+/******************************* END IRC **********************************/
