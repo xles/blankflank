@@ -1,0 +1,59 @@
+{
+    "project": {
+        "slug": "project",
+        "url": "/tag/project/",
+        "files": [
+            "2013-06-08_presenting-augustus.md"
+        ]
+    },
+    "gusto": {
+        "slug": "gusto",
+        "url": "/tag/gusto/",
+        "files": [
+            "2013-06-08_presenting-augustus.md"
+        ]
+    },
+    "blog engine": {
+        "slug": "blog-engine",
+        "url": "/tag/blog-engine/",
+        "files": [
+            "2013-06-08_presenting-augustus.md"
+        ]
+    },
+    "JavaScript": {
+        "slug": "javascript",
+        "url": "/tag/javascript/",
+        "files": [
+            "2013-08-02_re-learning-everything.md",
+            "2013-08-14_how-i-stopped-worrying-and-love-the-javascript.md"
+        ]
+    },
+    "KnockoutJS": {
+        "slug": "knockoutjs",
+        "url": "/tag/knockoutjs/",
+        "files": [
+            "2013-08-02_re-learning-everything.md"
+        ]
+    },
+    "RequireJS": {
+        "slug": "requirejs",
+        "url": "/tag/requirejs/",
+        "files": [
+            "2013-08-02_re-learning-everything.md"
+        ]
+    },
+    "Moustache": {
+        "slug": "moustache",
+        "url": "/tag/moustache/",
+        "files": [
+            "2013-08-02_re-learning-everything.md"
+        ]
+    },
+    "SPA": {
+        "slug": "spa",
+        "url": "/tag/spa/",
+        "files": [
+            "2013-08-02_re-learning-everything.md"
+        ]
+    }
+}

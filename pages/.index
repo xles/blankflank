@@ -1,0 +1,23 @@
+{
+    "about.md": {
+        "title": "About",
+        "slug": "about",
+        "layout": "page",
+        "path": "/about",
+        "url": "/about/"
+    },
+    "contact.md": {
+        "title": "Contact",
+        "slug": "contact",
+        "layout": "page",
+        "path": "/contact",
+        "url": "/contact/"
+    },
+    "resume.md": {
+        "title": "Resume",
+        "slug": "resume",
+        "layout": "page",
+        "path": "/about/resume",
+        "url": "/about/resume/"
+    }
+}

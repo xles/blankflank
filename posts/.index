@@ -1,0 +1,41 @@
+{
+    "2013-06-08_presenting-augustus.md": {
+        "title": "Presenting: Augustus.",
+        "category": "Projects",
+        "tags": [
+            "project",
+            "gusto",
+            "blog engine"
+        ],
+        "pubdate": "2013-06-08",
+        "slug": "presenting-augustus",
+        "layout": "post",
+        "url": "/2013/06/presenting-augustus/"
+    },
+    "2013-08-02_re-learning-everything.md": {
+        "title": "Re-learning everything.",
+        "category": "Projects",
+        "tags": [
+            "JavaScript",
+            "KnockoutJS",
+            "RequireJS",
+            "Moustache",
+            "SPA"
+        ],
+        "pubdate": "2013-08-02",
+        "slug": "re-learning-everything",
+        "layout": "post",
+        "url": "/2013/08/re-learning-everything/"
+    },
+    "2013-08-14_how-i-stopped-worrying-and-love-the-javascript.md": {
+        "title": "How I stopped worrying and love the JavaScript.",
+        "category": "Uncategorized",
+        "tags": [
+            "JavaScript"
+        ],
+        "pubdate": "2013-08-14",
+        "slug": "how-i-stopped-worrying-and-love-the-javascript",
+        "layout": "post",
+        "url": "/2013/08/how-i-stopped-worrying-and-love-the-javascript/"
+    }
+}

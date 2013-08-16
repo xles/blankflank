@@ -1,0 +1,17 @@
+{
+    "Projects": {
+        "slug": "projects",
+        "url": "/category/projects/",
+        "files": [
+            "2013-06-08_presenting-augustus.md",
+            "2013-08-02_re-learning-everything.md"
+        ]
+    },
+    "Uncategorized": {
+        "slug": "uncategorized",
+        "url": "/category/uncategorized/",
+        "files": [
+            "2013-08-14_how-i-stopped-worrying-and-love-the-javascript.md"
+        ]
+    }
+}
