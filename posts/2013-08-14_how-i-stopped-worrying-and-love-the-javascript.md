@@ -13,21 +13,23 @@ Google's strategy for speeding up JavaScript was to compile it down to native ma
 Well, yes and no.  It has it's fair share of quirks, still, but it has evolved a lot since the '90s.  Short answer is, _it's gotten better_. And it's still getting better.  I'm told that [ECMAScript 6][3] is going to further improve the language's syntax, and add some features that are sought after.  One can only hope that the adoption of ECMAScript 6 will be sufficiently fast.
 
 Then there's the whole JavaScript eco-system that has evolved in the past few years.  It's downright amazing how far it's gotten in a few short years.  We have front-end scaffolding utilities such as [Yeoman][4], task runners such as [Grunt][5], and package managers such as [Bower][6].  It's gotten to the point where the front-end tooling is matching that of any other area of development.  
-We've had an increase in speed by several orders of magnitude (not even accounting for Mores law).  We have a good set of tools, with more and better tools on the way.  we have some amazing looking modern frameworks, such as [Meteor][7].  we have unit testing, we have virtually anything you can think of that you'd need to start developing a rich client side application today.
 
-So go download [Yeoman][4] (requires [Node.js][8]) and start building your client side application today.  It comes bundled with [Grunt][5] and [Bower][6], so you can take a good look at the multitude of packages already available to you with `% bower search`.
+We've had an increase in speed by several orders of magnitude (not even accounting for Mores law).  We have a good set of tools, with more and better tools on the way.  we have some amazing looking modern frameworks, such as [Meteor][7].  we have [unit testing][8], we have virtually anything you can think of that you'd need to start developing a rich client side application today.
 
-Don't worry about whether or not JavaScript is fast enough, it is, and will only get faster.  Or that it's a language reserved for rank amateurs, it's not, take a look at [Gmail][9].
+So go download [Yeoman][4] (requires [Node.js][9]) and start building your client side application today.  It comes bundled with [Grunt][5] and [Bower][6], so you can take a good look at the multitude of packages already available to you with `% bower search`.
 
-[1]: http://google.com/chrome
-[2]: http://code.google.com/p/v8
-[3]: http://ecma.org/harmony
-[4]: http://yeoman.io
-[5]: http://grunt.org
-[6]: http://bower.org
-[7]: http://meteor.org
-[8]: http://nodejs.org
-[9]: http://gmail.com/
+Don't worry about whether or not JavaScript is fast enough, it is, and will only get faster.  Or that it's a language reserved for rank amateurs, it's not, take a look at [Gmail][10].
+
+ [1]: http://google.com/chrome
+ [2]: http://code.google.com/p/v8
+ [3]: http://ecma.org/harmony
+ [4]: http://yeoman.io
+ [5]: http://grunt
+ [6]: http://bower
+ [7]: http://meteor
+ [8]: http://qunit
+ [9]: http://nodejs.org
+[10]: http://gmail.com/
 
 ---EOF---
 {

@@ -23,35 +23,87 @@ class Augustus {
 	private function read_config()
 	{
 		$config = file_get_contents('.config');
-		$config = (array) json_decode($config);
+		$config = json_decode($config, true);
 		return $config;
+	}
+	public function print_array($arr, $level = 0) {
+		foreach ($arr as $key => $val) {
+			for($i=0; $i<$level; $i++)
+				$key = '   '.$key;
+			
+			if(is_array($val)) {	
+				printf("%s:\n",$key);
+				$this->print_array($val, $level+1);
+			}
+			else {
+				printf("%-15s = %s\n", $key, $val);
+			}
+		}	
 	}
 	public function configure($args)
 	{
 		$config = $this->read_config();
 		if (empty($args)) {
 			printf("Current configuration:\n");
-			foreach ($config as $key => $value) {
-				printf("%-15s = %s\n", $key, $value);
-			}
+			$this->print_array($config);
 		} else {
-			if (array_key_exists($args, $config)) {
+			if (!array_key_exists($args, $config)) {
+				echo "Invalid configuration node.\n";
+				return false;
+			} else if($args == 'syndication') {
+				$config['syndication'] = 
+					$this->configure_feeds();
+			} else {
 				printf("New value for %s [%s]: ", 
 					$args, $config[$args]);
 				$conf = trim(fgets(STDIN));
 				if(empty($conf))
 					$conf = $config[$args];
 				$config[$args] = $conf;
-				$config = json_encode($config, 
-						  JSON_PRETTY_PRINT
-						| JSON_UNESCAPED_SLASHES);
-				file_put_contents('.config', $config);
-
-				printf("`%s` set to '%s'.\n", $args, $conf);
-			} else {
-				echo "Invalid configuration node.\n";
 			}
+			$config = json_encode($config, 
+					  JSON_PRETTY_PRINT
+					| JSON_UNESCAPED_SLASHES);
+			file_put_contents('.config', $config);
+
+			printf("`%s` set to '%s'.\n", $args, $conf);
 		}
+	}
+	public function configure_feeds()
+	{
+		$config = $this->read_config()['syndication'];
+
+		echo "Syndication configuration wizard\n\n";
+		printf("Blog Title:\n\"%s\"\n> ", $config['title']);
+		$title = trim(fgets(STDIN));
+		if(empty($title)) $title = $config['title'];
+		
+		printf("Blog description:\n\"%s\"\n> ", $config['description']);
+		$description = trim(fgets(STDIN));
+		if(empty($description)) $description = $config['description'];
+		
+		printf("Domain:\n\"%s\"\n> ", $config['url']);
+		$url = trim(fgets(STDIN));
+		if(empty($url)) $url = $config['url'];
+		
+		echo "Author:\n";
+		printf("Name [%s]: ", $config['author']['name']);
+		$author['name'] = trim(fgets(STDIN));
+		if(empty($author['name'])) $author['name'] = $config['author']['name'];
+
+		printf("E-mail [%s]: ", $config['author']['email']);
+		$author['email'] = trim(fgets(STDIN));
+		if(empty($author['email'])) $author['email'] = $config['author']['email'];
+
+		if(empty($config['atom_id']))
+			$config['atom_id'] = 'tag:'.$url.','.date('Y').':'.md5($title);
+
+		$json = ['title'    => $title,
+			 'description' => $description,
+			 'url'     => $url,
+			 'author'  => $author,
+			 'atom_id'  => $config['atom_id']];
+		return $json;
 	}
 
 	public function new_post()
@@ -72,12 +124,16 @@ class Augustus {
 		echo "Tags (separate by commas): ";
 		$tags = array_map('trim',(explode(',', fgets(STDIN))));
 
+		$atom_id = 'tag:'.$this->config['syndication']['url'];
+		$atom_id += ','.$date.':'.md5($title);
+
 		$json = ['title'    => $title,
 			 'category' => $category,
 			 'tags'     => $tags,
 			 'pubdate'  => $date,
 			 'slug'     => $this->slug($title), 
-			 'layout'   => 'post'];
+			 'layout'   => 'post',
+			 'atom_id'  => $atom_id];
 
 		$md  = "Post goes here\n\n";
 		$md .= "---EOF---\n";
@@ -116,8 +172,41 @@ class Augustus {
 
 		exit("Static page saved as $filename.\n");
 	}
+
+	public function check_config()
+	{
+		$config = $this->read_config();
+		if(empty($config['syndication']['atom_id'])) {
+			echo "\e[31mWARNING: You're building on default syndication settings. "
+				."Doing this is inadvisable, as your \e[0m\n"
+				."Would you like to configure them now? "
+				."[\e[32mYes\e[0m] / \e[31mNo\e[0m / \e[33mAbort\e[0m: ";
+			$c = trim(fgets(STDIN));
+			switch (strtolower($c[0])) {
+				case 'n':
+					echo "\e[33mWarning ignored, continuing build\e[0m\n";
+					return true;
+					break;
+				case 'a':
+					return false;
+					break;
+				case 'y':
+				default:
+					$this->configure('syndication');
+					return true;
+					break;
+			}
+		} else {
+			return true;
+		}
+	}
+
 	public function build()
 	{
+		echo "Building in progress...\n\n";
+		if(!$this->check_config()) {
+			exit("\e[33mAborted by user\e[0m.\n\nBuild halted.\n");
+		}
 		if ($this->options['clean'] == true
 			&& $this->options['forced'] == true) {
 			echo "Cleaning up build directory ";
@@ -140,39 +229,40 @@ class Augustus {
 			$this->render_page($file);
 			echo '.';
 		}
-		echo " OK\nRendering index ";
+		echo " \e[32mOK\e[0m\nRendering index ";
 		$this->render_index('index');
 
 		$json = file_get_contents('./posts/.tags');
-		$json = (array) json_decode($json);
+		$json = json_decode($json, true);
 		foreach ($json as $tag => $vars) {
-			$vars = (array) $vars;
+			$vars = $vars;
 			$vars['title'] = $tag;
-			$this->render_index('tag', (array) $vars);
+			$this->render_index('tag', $vars);
 		}
 
 		unset($vars);
 
 		$json = file_get_contents('./posts/.categories');
-		$json = (array) json_decode($json);
+		$json = json_decode($json, true);
 		foreach ($json as $tag => $vars) {
-			$vars = (array) $vars;
+			$vars = $vars;
 			$vars['title'] = $tag;
-			$this->render_index('category', (array) $vars);
+			$this->render_index('category', $vars);
 		}
-		echo " OK\n";
+		echo " \e[32mOK\e[0m\n";
 		
 		$files = $this->write_checksums('posts');
 		$files = $this->write_checksums('pages');
+		$this->generate_feeds();
 		echo "\nFinished building site.\n";
 	}
 
 	private function tag_list($type) 
 	{
 		$json = file_get_contents("./posts/.$type");
-		$json = (array) json_decode($json);
+		$json = json_decode($json, true);
 		foreach ($json as $tag => $vars) {
-			$tags[$tag] = (array) $vars;
+			$tags[$tag] = $vars;
 			$tags[$tag]['title'] = $tag;
 		}
 		natcasesort($tags);
@@ -314,13 +404,13 @@ class Augustus {
 			case 'tag':
 				$dest .= $var['url'];
 				$json = file_get_contents('./posts/.tags');
-				$json = (array) json_decode($json);
+				$json = json_decode($json, true);
 				$tag = $var['title'];
 				break;
 			case 'category':
 				$dest .= $var['url'];
 				$json = file_get_contents('./posts/.categories');
-				$json = (array) json_decode($json);
+				$json = json_decode($json, true);
 				$category = $var['title'];
 				break;
 		}
@@ -373,6 +463,8 @@ class Augustus {
 					$content = $this->prosedown($content);
 				$content = Markdown::defaultTransform($content);
 
+				$content = $this->more($content);
+
 				$posts[$file]['content'] = $content;
 			}
 			return $posts;
@@ -396,12 +488,12 @@ class Augustus {
 	}
 	private function read_index()
 	{
-		$json = (array) json_decode(file_get_contents('./posts/.index'));
+		$json = json_decode(file_get_contents('./posts/.index'), true);
 		
 		foreach ($json as $file => $data) {
 			unset($tags);
 			
-			$posts[$file] = (array) $data;
+			$posts[$file] = $data;
 /*
 			list(	$posts[$file]['year'], 
 				$posts[$file]['month'], 
@@ -431,6 +523,7 @@ class Augustus {
 			}
 			$posts[$file]['tags'] = $tags;
 
+			$posts[$file]['date'] = $posts[$file]['pubdate'];
 			$posts[$file]['pubdate'] = 
 				$this->timeago($posts[$file]['pubdate']);
 		}
@@ -454,7 +547,7 @@ class Augustus {
 		if ($this->config['prosedown'] == "enabled")
 			$content = $this->prosedown($content);
 		$content = Markdown::defaultTransform($content);
-		$json = (array) json_decode($json);
+		$json = json_decode($json, true);
 		$page_title = $json['title'];
 		$layout = $this->config['template'].'/'.$json['layout'].'.html';
 
@@ -481,6 +574,9 @@ class Augustus {
 		$post_tags = $pt;
 		$page_url = $this->get_urls();
 
+		$site['title'] = $this->config['syndication']['title'];
+		$site['description'] = $this->config['syndication']['description'];
+
 		if ($this->config['comments'] == 'intensedebate')
 			$intensedebate = $this->config['intensedebate'];
 
@@ -506,11 +602,14 @@ class Augustus {
 	private function get_urls()
 	{
 		$json = file_get_contents('./pages/.index');
-		$json = (array) json_decode($json);
+		$json = json_decode($json, true);
 		foreach ($json as $data) {
-			$data = (array) $data;
+			$data = $data;
 			$urls[$data['slug']] = $data['url'];
 		}
+		$cfg = $this->read_config()['syndication'];
+		$urls['atom_feed'] = $cfg['url'].'/feed/atom.xml';
+		$urls['rss_feed'] = $cfg['url'].'/feed/rss.xml';
 		return $urls;
 	}
 	public function write_indicies()
@@ -522,7 +621,7 @@ class Augustus {
 				$tmp = file_get_contents('./posts/'.$file);
 				$pattern = '/[\n]\s*[-]{2,}\s*EOF\s*[-]{2,}\s*[\n]/s';
 				$post = preg_split($pattern, $tmp);
-				$json = (array) json_decode($post[1]);
+				$json = json_decode($post[1], true);
 				$cats[$json['category']]['slug'] = 
 					$this->slug($json['category']);
 				$cats[$json['category']]['url'] =
@@ -551,12 +650,12 @@ class Augustus {
 				$tmp = file_get_contents('./pages/'.$file);
 				$pattern = '/[\n]\s*[-]{2,}\s*EOF\s*[-]{2,}\s*[\n]/s';
 				$post = preg_split($pattern, $tmp)[1];
-				$json = (array) json_decode($post);
+				$json = json_decode($post, true);
 				$json['url'] = $this->format_url($json, 'page');
 				$pages[$file] = $json;
 			}
 		}
-		echo " OK\n";
+		echo " \e[32mOK\e[0m\n";
 		$cats = json_encode($cats, JSON_PRETTY_PRINT 
 					 | JSON_UNESCAPED_SLASHES);
 		$tags = json_encode($tags, JSON_PRETTY_PRINT
@@ -572,6 +671,88 @@ class Augustus {
 			return true;
 		else
 			return false;		
+	}
+	public function more($str) {
+		if(!$this->config['more_tag'])
+			return $str;
+		/*
+		$str = dom;
+		inspect dom
+		count p for config:more_tag
+		drop after
+		dom = str
+		*/
+
+
+		return $str; 
+	}
+
+	public function generate_feeds() 
+	{
+		$cfg = $this->config['syndication'];
+		$site_url = 'http://'.$cfg['url'].'/';
+
+		$rss = new \SimpleXMLElement(
+			'<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"></rss>'); 
+		$rss->addChild('channel'); 
+		$rss->channel->addChild('title', $cfg['title']); 
+		$l = $rss->channel->addChild('atom:link', false, 'http://www.w3.org/2005/Atom');
+		$l->addAttribute('href', $site_url.'feed.rss'); 
+		$l->addAttribute('rel', 'self'); 
+		$l->addAttribute('type', 'application/rss+xml'); 
+		$rss->channel->addChild('link', $site_url); 
+		$rss->channel->addChild('description', $cfg['description']);
+		$rss->channel->addChild('lastBuildDate', date(DATE_RSS)); 
+		 
+		$atom = new \SimpleXMLElement(
+			'<feed xmlns="http://www.w3.org/2005/Atom"></feed>'); 
+		$atom->addChild('title', $cfg['title']); 
+		$l = $atom->addChild('link');
+		$l->addAttribute('href', $site_url.'feed.atom'); 
+		$l->addAttribute('rel', 'self'); 
+		$l = $atom->addChild('link');
+		$l->addAttribute('href', $site_url); 
+		$atom->addChild('subtitle', $cfg['description']);
+		$atom->addChild('updated', date(DATE_ATOM)); 
+		$atom->addChild('id', $cfg['atom_id']); 
+
+		/*   'tag:'.$cfg['url'].',date:hash'   */
+		
+		$posts = $this->get_post($this->read_index());
+
+		foreach ($posts as $post) { 
+			$post_url = 'http://'.$cfg['url'].$post['url'];
+			
+			$item = $rss->channel->addChild('item'); 
+			$item->addChild('title', $post['title']); 
+			$item->addChild('link', $post_url);
+			$item->addChild('description', $post['content']); 
+			$item->addChild('pubDate', 
+				date(DATE_RSS, strtotime($post['date']))); 
+			$item->addChild('guid', $post_url); 
+
+			$entry = $atom->addChild('entry');
+			$entry->addChild('title', $post['title']); 
+			$entry->addChild('link');
+			$entry->link->addAttribute('href', $post_url);
+			$entry->addChild('content', $post['content']);
+			$entry->content->addAttribute('type', 'html'); 
+			$entry->addChild('updated', 
+				date(DATE_ATOM, strtotime($post['date']))); 
+			$entry->addChild('id', $post['atom_id']); 
+			$entry->addChild('author');
+			$entry->author->addChild('name', $cfg['author']['name']);
+			$entry->author->addChild('email', $cfg['author']['email']);
+		} 
+
+		if(!file_exists('./build/feed'))
+			mkdir('./build/feed');
+
+		if ($rss->asXML('./build/feed/rss.xml') &&
+				$atom->asXML('./build/feed/atom.xml'))
+			return true;
+		else 
+			return false;
 	}
 	public function write_checksums($dir)
 	{
@@ -607,7 +788,7 @@ class Augustus {
 		}
 
 		$files = file_get_contents($path.'.checksums');
-		$files = (array) json_decode($files);
+		$files = json_decode($files, true);
 
 		$tmp = array_diff(scandir($path), array_keys($files));
 		echo "Checking for new $dir ";
