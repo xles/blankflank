@@ -8,7 +8,7 @@ generator (that totally isn't a rip-off of [jekyll][1]) written in php 5.4.
 So far it doesn't do much, and some features are somewhat broken.  The few
 things that are done however are:
 
-* The testing server accessible via `gusto run`, courtesy of php 5.4.
+* The testing server accessible via `% gusto run`, courtesy of php 5.4.
 
 * The creation of new posts and pages.
 

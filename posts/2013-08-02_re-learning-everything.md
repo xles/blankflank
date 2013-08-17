@@ -82,7 +82,7 @@ doesn't enjoy a good challenge?
         "JavaScript",
         "KnockoutJS",
         "RequireJS",
-        "Moustache",
+        "Mustache",
         "SPA"
     ],
     "pubdate": "2013-08-02",
