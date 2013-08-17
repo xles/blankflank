@@ -1,15 +1,15 @@
 			<header>
-  				<h1>Blankflank.</h1>
-  				<strong>Forever without a cutiemark</strong>
+  				<h1><?=$site['title']?></h1>
+  				<strong><?=$site['description']?></strong>
 			</header>
-			<?php include($page_url['template_dir'].'categories.html'); ?>		
+			<?php include('./templates/bootstrap/categories.html'); ?>		
 			<hr>
-			<?php include($page_url['template_dir'].'tags.html'); ?>
+			<?php include('./templates/bootstrap/tags.html'); ?>
 			<hr>
 			<dl>
 				<dt>foo</dt>
 				<dd>
-					<ul class="unstyled">
+					<ul class="list-unstyled">
 						<li><a href="/">Blag</a></li>
 						<li><a href="<?=$page_url['about']?>">About</a></li>
 						<li><a href="<?=$page_url['contact']?>">Contact</a></li>

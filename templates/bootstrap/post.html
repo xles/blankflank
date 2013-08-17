@@ -1,22 +1,22 @@
 <div class="container">
 	<div class="row">
-		<div class="span9">
+		<div class="col-md-9">
 			<h1><?=$title?></h1>
 			Posted <?=$pubdate?>
 			in <a href="<?=$category['url']?>"><?=$category['title']?></a>
 			<article>
 				<?=$content?>
 			</article>
-			<small>
+			<span class="glyphicon glyphicon-tags">
 			<?php foreach($post_tags as $tag): ?>
-				<a href="<?=$tag['url']?>" class="label"><?=$tag['title']?></a>
+				<a href="<?=$tag['url']?>" class="label label-default"><?=$tag['title']?></a>
 			<?php endforeach; ?>
-			</small>
+			</span>
 			<hr>
-			<?php include($page_url['template_dir'].'comments.html'); ?>
+			<?php include('./templates/bootstrap/comments.html'); ?>
 		</div>
-		<div class="span3 sidebar">
-			<?php include($page_url['template_dir'].'sidebar.html'); ?>
+		<div class="col-md-3 sidebar">
+			<?php include('./templates/bootstrap/sidebar.html'); ?>
 		</div>
 	</div>
 	<hr>

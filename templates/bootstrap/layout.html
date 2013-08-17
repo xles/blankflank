@@ -1,0 +1,76 @@
+<?php
+$page_title ? 
+$page_title = "$page_title | ".$site['title'] : 
+$page_title = $site['title'];
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+		<title><?=$page_title?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+                    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+                                   <link rel="shortcut icon" href="/img/favicon.ico">
+		<link type="application/atom+xml" rel="alternate" href="http://<?=$page_url['atom_feed']?>" title="ATOM">
+		<link type="application/rss+xml"  rel="alternate" href="http://<?=$page_url['rss_feed']?>"  title="RSS">
+
+	</head>
+
+	<body>
+
+		<nav class="navbar navbar-fixed-top" role="navigation">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle navigation</span>
+      		<span class="icon-bar"></span>
+     	 		<span class="icon-bar"></span>
+      		<span class="icon-bar"></span>
+    		</button>
+    		<a class="navbar-brand" href="#"><?=$site['title']?></a>
+  		</div>
+   		<div class="collapse navbar-collapse navbar-ex1-collapse">
+    		<ul class="nav navbar-nav">
+					<li class="active"><a href="/">Blag</a></li>
+					<li><a href="<?=$page_url['about']?>">About</a></li>
+					<li><a href="<?=$page_url['contact']?>">Contact</a></li>
+					<li><a href="<?=$page_url['resume']?>">Resume</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</nav>
+
+			<?php include($layout); ?>
+
+		<footer>
+			&copy; &lt;year&gt; &lt;copyright holders&gt;<br>
+			Powered by <a href="http://github.com/xles/augustus/" target="_blank">Augustus</a>.
+			Built with <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>.
+			Icons from <a href="http://glyphicons.com/" target="_blank">Glyphicons Free</a>.
+		</footer>
+	<!-- Le javascript
+	================================================== -->
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="/js/jquery.timeago.js"></script>
+		<script>
+			jQuery(document).ready(function() {
+				jQuery("time.timeago").timeago();
+			});
+		</script>
+
+  </body>
+</html>

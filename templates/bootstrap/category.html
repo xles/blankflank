@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="span9">
+		<div class="col-md-9">
 			<h2>Listing posts in <?=$category?></h2>
 
 			<?php foreach ($posts as $post): ?>
@@ -11,15 +11,15 @@
 					in <?=$post['category']?>
 				<br>Tags:
 				<?php foreach ($post['tags'] as $tag): ?>
-					<a href="<?=$tag['url']?>" class="label"><?=$tag['title']?></a>
+					<a href="<?=$tag['url']?>" class="label label-default"><?=$tag['title']?></a>
 				<?php endforeach; ?>
 				<hr>
 -->
 				</p>
 			<?php endforeach; ?>
 		</div>
-		<div class="span3 sidebar">
-			<?php include($page_url['template_dir'].'sidebar.html'); ?>
+		<div class="col-md-3 sidebar">
+			<?php include('./templates/bootstrap/sidebar.html'); ?>
 		</div>
 	</div>
 	<hr>
